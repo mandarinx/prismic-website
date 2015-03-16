@@ -1,0 +1,27 @@
+{
+  "name": "prismic-website",
+  "version": "0.0.1",
+  "description": "A ready to use webserver (Express base) with utility methods for working with Prismic.io.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://mandarinx@github.com/mandarinx/prismic-website.git"
+  },
+  "keywords": [
+    "prismic.io",
+    "express",
+    "website"
+  ],
+  "author": "Thomas Viktil <mandarin@mandarin.no> (http://mandarin.no)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mandarinx/prismic-website/issues"
+  },
+  "homepage": "https://github.com/mandarinx/prismic-website",
+  "engines" : {
+    "node" : ">=0.10.35"
+  }
+}
