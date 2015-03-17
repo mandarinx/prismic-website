@@ -91,16 +91,16 @@ You can do like this:
 
 ```
 app.events.on('home', function(req, res, next) {
-	
+
 	var options = { type: 'product' };
-	
+
 	app.query(res.locals.ctx, options)
 		.then(function(products) {
-		
+
 			products.results.forEach(function(product) {
 				console.log('Product name:' + product.getText('product.name'));
 			});
-			
+
 		});
 });
 ```
@@ -239,18 +239,18 @@ As shown in the introduction, you can use the query object to query Prismic for 
 
 ```
 app.events.on('drawings', function(req, res, next) {
-	
+
 	app.query(res.locals.ctx, { type: 'drawings' })
 		.then(function(drawings) {
-			
+
 			res.content.drawings = [];
-			
+
 			drawings.results.forEach(function(drawing) {
 				res.content.drawings.push({
 					name: drawing.getText('drawing.name')
 				});
 			});
-			
+
 		});
 });
 ```
@@ -270,7 +270,7 @@ page: {
 
 With this you can easily get access to the page's name and url in the template. Useful for toggling content based on what page you're looking at.
 
-In this case, the page url will be ```http://www.mydomain.com/drawings```. ```config.url('base')``` is the base property of the url object in config.json that we passed to prismic-website in the setup. 
+In this case, the page url will be ```http://www.mydomain.com/drawings```. ```config.url('base')``` is the base property of the url object in config.json that we passed to prismic-website in the setup.
 
 Page_name is used to get the route for the current page. This won't be a problem for routes like '/home' but for routes like '/drawing/:slug/:id', the url will be 'http://www.mydomain.com/drawing/:slug/:id', which obviously won't work.
 
@@ -328,13 +328,13 @@ Getting the bookmarks is easy. Do like this in a route handler:
 
 ```
 app.events.on('home', function(req, res, next) {
-	
+
 	app.bookmarks.get(res.locals.ctx)
 		.then(function(bookmarks) {
 			Object.keys(bookmarks).forEach(function(document_name) {
 				// Document name: document_name
 				// Document object: bookmarks[document_name]
-			});			
+			});
 		});
 
 });
@@ -377,8 +377,6 @@ Behind the scenes, prismic-website will plant a cookie in your browser which you
 Bypass works by adding ```/?bypass=true``` to the URL. The cookie lasts for 3 hours, and then you have to do the bypass trick again.
 
 # Developing
-
-Clone or fork the repo, start the development server with ```npm run dev```. File watching is done using [Nodemon](http://nodemon.io/) and configured in ```dev.js```.
 
 Tests are written with [Mocha](http://mochajs.org/).
 
