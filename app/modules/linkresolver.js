@@ -1,11 +1,12 @@
-var config          = require('../../config');
+var config          = require(__dirname + '/../../config');
+var type            = require('./type');
 
 module.exports.ahref = function(url) {
-    return url ? '<a href="'+url+'">'+url+'</a>' : null;
+    return type(url).is_string ? '<a href="'+url+'">'+url+'</a>' : url;
 }
 
 module.exports.email = function(value) {
-    return value ? '<a href="mailto:'+value+'">'+value+'</a>' : '';
+    return type(value).is_string ? '<a href="mailto:'+value+'">'+value+'</a>' : value;
 }
 
 // Accepts a Prismic document and a url type.
@@ -13,32 +14,46 @@ module.exports.email = function(value) {
 // gets the domain name from config to output full urls.
 // For route '/project/:slug/:id', the link resolver will output the
 // domain name, append 'project' since it isn't a variable, and for each
-// param that starts with a :, it will try to get it from the document. For
-// optional params, that starts with ?, it will check if the document has
-// a property with the same name.
+// param that starts with a :, it will try to get the value from the document.
 
-// TODO: The resolver should implement better checking and error reporting for
-// required params (the ones that start with ':').
-module.exports.document = function(type, doc) {
-    if (doc) {
-        var url = config.routes[type].split('/');
+// TODO: Lacks support for all routes (*)
+module.exports.document = function(route_name, doc) {
+    var route = config.routes[route_name];
 
-        url = url.map(function(param) {
-            if (param.charAt(0) === ':') {
-                return doc[param.slice(1)];
-            }
-
-            if (param.charAt(0) === '?') {
-                if (typeof doc[param.slice(1)] !== 'undefined') {
-                    return doc[param.slice(1)];
-                }
-            }
-
-            return param;
-        });
-
-        return config.url('base') + url.join('/');
+    if (type(route).is_undefined) {
+        return null;
     }
 
-    return null;
+    var url = config.routes[route_name].split('/').map(function(param) {
+
+        if (param.charAt(0) === ':') {
+
+            if (param.charAt(param.length - 1) === '?') {
+                var optional;
+
+                if (type(doc).is_object) {
+                    optional = doc[param.slice(1, param.length - 1)];
+                }
+
+                return !type(optional).is_undefined ? optional : null;
+
+            } else {
+                var required;
+
+                if (type(doc).is_object) {
+                    required = doc[param.slice(1)];
+                }
+
+                return !type(required).is_undefined ? required : 'PARAM_ERROR';
+            }
+        }
+
+        return param;
+    });
+
+    var str = config.url('base') + url.join('/');
+    if (str.charAt(str.length - 1) !== '/') {
+        str += '/';
+    }
+    return str;
 }

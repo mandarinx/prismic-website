@@ -1,4 +1,4 @@
-var config          = require('../../config');
+var config          = require(__dirname + '/../../config');
 
 module.exports = function(page_name) {
     return function(req, res, next) {

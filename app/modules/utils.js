@@ -1,4 +1,3 @@
-var Prismic         = require('prismic.io').Prismic;
 var config          = require('../../config');
 
 module.exports.getImage = function getImage(img) {

@@ -1,7 +1,7 @@
 var Prismic         = require('prismic.io').Prismic;
-var config          = require('../../config');
+var config          = require(__dirname + '/../../config');
 
-// Router middleware that adds a Prismic context to the res object
+// Router middleware adds a Prismic context to the res object
 module.exports = function(req, res, next) {
     Prismic.Api(config.apiEndpoint, function(err, Api) {
         if (err) {
