@@ -384,8 +384,9 @@ Do you want to contribute? Pull requests are happily accepted.
 
 # TODO
 
-- Add Heroku install badge for easy setup
-- Run page.url through the link resolver before dispatching the route event
+- Add Heroku install badge for easy setup.
+- Run page.url through the link resolver before dispatching the route event.
+- Add file watching on all source files including test files. Run Mocha tests on each update.
 
 # License
 
