@@ -22,17 +22,23 @@ var linkresolver    = require('./modules/linkresolver');
 var web;
 var errs;
 var hbs_ext = '.hbs';
+var assign = Object.assign || require('object.assign');
 
-module.exports = function() {
+module.exports = function(options) {
 
     hbHelpers.init();
+    options = options || {};
+    var helpers = typeof options.helpers !== 'undefined' ?
+                  assign({}, hbHelpers, options.helpers) :
+                  hbHelpers;
+
     errs = errors(config.verbose);
     web = express();
 
     var hbs = exphbs.create({
         extname:        hbs_ext,
         defaultLayout:  'main',
-        helpers:        hbHelpers,
+        helpers:        helpers,
         layoutsDir:     config.dir('layout'),
         partialsDir:    config.dir('partials')
     });

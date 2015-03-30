@@ -23,7 +23,7 @@ Main.prototype.init = function(config_json, options) {
         msg:  'starting server'
     });
 
-    server = http.createServer(web());
+    server = http.createServer(web(options));
     server.listen(config.port, onListen);
 
     this.emit('ready', web);
