@@ -1,4 +1,5 @@
-var config = require('../../config');
+var config      = require('../../config');
+var Handlebars  = require('handlebars');
 
 module.exports.init = function() {
     // Add a helper for each route. A route for e.g. the about page will
@@ -11,6 +12,14 @@ module.exports.init = function() {
 
 module.exports.first = function(context, options) {
     return options.fn(context[0]);
+}
+
+module.exports.ashtml = function(context, options) {
+    return new Handlebars.SafeString(context.asHtml());
+}
+
+module.exports.astext = function(context, options) {
+    return new Handlebars.SafeString(context.asText());
 }
 
 module.exports.capitalize = function(options) {
