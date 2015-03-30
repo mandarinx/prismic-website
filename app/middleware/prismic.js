@@ -9,6 +9,8 @@ module.exports = function(req, res, next) {
             return res.send(500, 'Error 500: ' + err.message);
         }
 
+        Api.apiCache.clear();
+
         var ref = req.query['ref'] || Api.master();
         var ctx = {
             api:        Api,
@@ -27,5 +29,12 @@ module.exports = function(req, res, next) {
         res.locals.ctx = ctx;
         next();
 
-    }, config.accessToken);
+    },
+    config.accessToken,
+    undefined,  // request handler
+    undefined,  // api cache
+    0);         // cache TTL in seconds. In prismic.io 1.1.3, this doesn't
+                // have any effect at all. Forcing a cache reset to get
+                // around the issue. TTL is supposed to cache the master ref
+                // for 5 seconds by default, but it doesn't work here.
 };
