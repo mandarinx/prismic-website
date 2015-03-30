@@ -14,6 +14,10 @@ module.exports.first = function(context, options) {
     return options.fn(context[0]);
 }
 
+module.exports.email = function(context, options) {
+    return new Handlebars.SafeString('<a href="mailto:'+context+'">'+context+'</a>');
+}
+
 module.exports.ashtml = function(context, options) {
     return new Handlebars.SafeString(context.asHtml());
 }
