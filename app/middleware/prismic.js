@@ -9,7 +9,7 @@ module.exports = function(req, res, next) {
             return res.send(500, 'Error 500: ' + err.message);
         }
 
-        Api.apiCache.clear();
+        Api.apiCache.clear(function() {});
 
         var ref = req.query['ref'] || Api.master();
         var ctx = {
