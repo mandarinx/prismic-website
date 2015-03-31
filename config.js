@@ -80,7 +80,9 @@ module.exports.init = function(config_json, options) {
 
 module.exports.dir = function(directory) {
     return base +
-           (this.production ? '/production' : '') +
+           (this.production && this.config.dir.production ?
+                this.config.dir.production :
+                '') +
            this.config.dir[directory];
 }
 
