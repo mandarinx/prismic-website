@@ -1,13 +1,16 @@
 var config          = require('../../config');
 
 module.exports.getImage = function getImage(img) {
-    return {
-        small:     img ? img.views.small.url : '',
-        medium:    img ? img.views.medium.url : '',
-        large:     img ? img.views.large.url : '',
-        main:      img ? img.main.url : '',
-        alt:       img ? img.main.alt : ''
-    };
+    if (img) {
+        return {
+            small:     img.views.small.url,
+            medium:    img.views.medium.url,
+            large:     img.views.large.url,
+            main:      img.main.url,
+            alt:       img.main.alt
+        };
+    }
+    return null;
 }
 
 module.exports.iterateGroup = function iterateGroup(options, cb) {
