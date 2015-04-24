@@ -14,8 +14,38 @@ module.exports.first = function(context, options) {
     return options.fn(context[0]);
 }
 
-module.exports.email = function(context, options) {
-    return new Handlebars.SafeString('<a href="mailto:'+context+'">'+context+'</a>');
+// Usage:
+// {{email hello@company.com "Send us an email" class="button"}}
+
+// If you leave out caption, the email address will be used as caption
+// If you leave out email, the email address will be replaced with caption
+// class argument is optional
+// If you leave out email and caption, both will default to john@doe.com
+module.exports.email = function(a_email_address, a_caption, a_options) {
+    var attrs = [];
+    var email = 'john@doe.com';
+    var caption = '';
+    var options = {
+        hash: {}
+    };
+
+    if (typeof a_email_address === 'string') {
+        email = a_email_address;
+        caption = typeof a_caption === 'string' ? a_caption : email;
+        options = typeof a_caption === 'string' ? a_options : a_caption;
+    } else {
+        caption = email;
+        options = a_email_address;
+    }
+
+    if (typeof options.hash.class !== 'undefined') {
+        attrs.push('class="' +
+                   Handlebars.escapeExpression(options.hash.class) +
+                   '"');
+    }
+
+    return new Handlebars.SafeString('<a href="mailto:'+email+'" '+
+                                     attrs.join(" ")+'>'+caption+'</a>');
 }
 
 module.exports.ashtml = function(context, options) {
