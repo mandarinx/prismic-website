@@ -49,7 +49,7 @@ module.exports.email = function(a_email_address, a_caption, a_options) {
 }
 
 module.exports.ashtml = function(context, options) {
-    return new Handlebars.SafeString(context.asHtml());
+    return new Handlebars.SafeString(context ? context.asHtml() : '');
 }
 
 module.exports.astext = function(context, options) {
