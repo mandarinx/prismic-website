@@ -1,3 +1,5 @@
+var logger      = require('logfmt');
+
 var config          = require(__dirname + '/../../config');
 var type            = require('./type');
 
@@ -57,6 +59,10 @@ module.exports.document = function(route_name, doc) {
     }
 
     console.log('linkesolver str', str);
+    logger.log({
+        type: 'info',
+        msg:  'linkesolver str' + str
+    });
 
     return str;
 }
