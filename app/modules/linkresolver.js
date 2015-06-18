@@ -53,7 +53,8 @@ module.exports.document = function(route_name, doc) {
         return param;
     });
 
-    var str = config.url() + url.join('/');
+    // var str = config.url() + url.join('/');
+    var str = 'http://www.comte.no' + url.join('/');
     if (str.charAt(str.length - 1) !== '/') {
         str += '/';
     }
