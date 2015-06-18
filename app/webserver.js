@@ -95,3 +95,7 @@ Object.defineProperty(module.exports, 'query', {
 Object.defineProperty(module.exports, 'linkresolver', {
     get: function() { return linkresolver; }
 });
+
+Object.defineProperty(module.exports, 'config', {
+    get: function() { return config; }
+});
