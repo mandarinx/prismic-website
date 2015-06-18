@@ -9,6 +9,9 @@ module.exports = function(page_name) {
                 base_url:   config.url()
             }
         };
+
+        console.log('defaultcontent page.url', res.content.page.url);
+        console.log('defaultcontent page.base_url', res.content.page.base_url);
         next();
     }
 }
