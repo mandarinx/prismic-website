@@ -86,10 +86,16 @@ module.exports.dir = function(directory) {
            this.config.dir[directory];
 }
 
-module.exports.url = function(type) {
+module.exports.url = function() {
+    if (not(undef(process.env.LOCAL))) {
+        if (bool(process.env.LOCAL)) {
+            return 'http://localhost:' + this.port;
+        }
+    }
+
     return this.production ?
-           this.config.url[type] :
-           'http://localhost:'+this.port;
+           this.config.url.pub :
+           this.config.url.dev;
 }
 
 function undef(value) {

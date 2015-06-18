@@ -5,7 +5,8 @@ var config_json = {
         "static_files": 7776000
     },
     "url": {
-        "base":         "http://www.mintdesign.no"
+        "pub":         "http://www.example.com",
+        "dev":         "http://dev.example.com"
     },
     "dir": {
         "public":       "/public",

@@ -51,7 +51,7 @@ module.exports.document = function(route_name, doc) {
         return param;
     });
 
-    var str = config.url('base') + url.join('/');
+    var str = config.url() + url.join('/');
     if (str.charAt(str.length - 1) !== '/') {
         str += '/';
     }

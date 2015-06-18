@@ -1,5 +1,9 @@
 # prismic-website
 
+```
+Jun 18th 2015: This readme needs an update. A few things have changed since it was written.
+```
+
 A super simple Node.js/Express based web server specifically tailored for using [Prismic.io](http://prismic.io/) for content management. Suitable for small websites, like portfolio sites and personal blogs. Can easily be extended to handle more advanced functionality.
 
 # What does it handle?

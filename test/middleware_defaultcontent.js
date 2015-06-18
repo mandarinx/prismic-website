@@ -17,7 +17,7 @@ describe('Default content middleware', function(){
 
         defcon(null, res, function() {
             assert.equal(res.content.page.name, page_name);
-            assert.equal(res.content.page.url, (config.url('base') + config.routes[page_name]));
+            assert.equal(res.content.page.url, (config.url() + config.routes[page_name]));
         });
     })
 })

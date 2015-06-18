@@ -5,8 +5,8 @@ module.exports = function(page_name) {
         res.content = {
             page: {
                 name:       page_name,
-                url:        config.url('base') + config.routes[page_name],
-                base_url:   config.url('base')
+                url:        config.url() + config.routes[page_name],
+                base_url:   config.url()
             }
         };
         next();
