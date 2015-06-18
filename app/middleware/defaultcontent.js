@@ -12,18 +12,6 @@ module.exports = function(page_name) {
             }
         };
 
-        console.log('defaultcontent page.url', res.content.page.url);
-        logger.log({
-            type: 'info',
-            msg:  'defaultcontent page.url' + res.content.page.url
-        });
-
-        console.log('defaultcontent page.base_url', res.content.page.base_url);
-        logger.log({
-            type: 'info',
-            msg:  'defaultcontent page.base_url' + res.content.page.base_url
-        });
-
         next();
     }
 }
