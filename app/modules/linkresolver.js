@@ -17,7 +17,7 @@ module.exports.email = function(value) {
 // param that starts with a :, it will try to get the value from the document.
 
 // TODO: Lacks support for all routes (*)
-module.exports.document = function(route_name, doc) {
+module.exports.document = function(route_name, doc, relative) {
     var route = config.routes[route_name];
 
     if (type(route).is_undefined) {
@@ -51,8 +51,7 @@ module.exports.document = function(route_name, doc) {
         return param;
     });
 
-    var str = config.url() + url.join('/');
-    // var str = 'http://www.comte.no' + url.join('/');
+    var str = (!relative ? config.url() : '') + url.join('/');
     if (str.charAt(str.length - 1) !== '/') {
         str += '/';
     }
